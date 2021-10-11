@@ -1,12 +1,5 @@
 import { Car } from "./Car.js";
 
-export function createMatrix(dimentionsComand){
-  var dimList = dimentionsComand.split(",");
-  var limMatrix = [parseInt(dimList[0]), parseInt(dimList[1])];
-  
-  return limMatrix;
-}
-
 export function getMatrixCommand(commandLines){
   var matrixCommand = commandLines.match(/(\d)+,(\d)+/g);
   return matrixCommand[0];
@@ -15,6 +8,18 @@ export function getMatrixCommand(commandLines){
 export function getCarCommand(commandLines){
   var carCommand = commandLines.match(/(\d)+,(\d)+ [NSEO]/g);
   return carCommand[0];
+}
+
+export function getMovementCommands(commandLines){
+  var movementCommands = commandLines.match(/[IAD]+/g);
+  return movementCommands[0];
+}
+
+export function createMatrix(dimentionsComand){
+  var dimList = dimentionsComand.split(",");
+  var limMatrix = [parseInt(dimList[0]), parseInt(dimList[1])];
+  
+  return limMatrix;
 }
 
 export function createCarAt(carCommand, matrixDimentions){
@@ -26,7 +31,23 @@ export function createCarAt(carCommand, matrixDimentions){
   return car;
 }
 
+export function moveCar(moveCarCommand, car){
+  var movementCommands = moveCarCommand.split("");
+  movementCommands.forEach(moveCommand => {
+    if(moveCommand == 'A'){
+      car.advanceCar();
+    }
+  });
+  return car.getPositionDirection();
+}
+
 export function executeCommandLines(commandLines){
   var createMatrixCommand = getMatrixCommand(commandLines);
   var limMatrix = createMatrix(createMatrixCommand);
+  var carPosDirCommand = getCarCommand(commandLines);
+  var car = createCarAt(carPosDirCommand, limMatrix);
+  var movementCommand = getMovementCommands(commandLines);
+  var finalPosition = moveCar(movementCommand, car);
+  return finalPosition;
 }
+
