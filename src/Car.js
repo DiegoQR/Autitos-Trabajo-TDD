@@ -11,7 +11,41 @@ export class Car{
         return positionDirecction;
     }
 
-    advanceCar(advancedSteps = 1){
+    turnLeft(){
+        switch(this.direcction){
+            case "N":
+                this.direcction = "O";
+                break;
+            case "S":
+                this.direcction = "E";
+                break;
+            case "E":
+                this.direcction = "N";
+                break;
+            case "O":
+                this.direcction = "S";
+                break;
+        }
+    }
+
+    turnRight(){
+        switch(this.direcction){
+            case "N":
+                this.direcction = "E";
+                break;
+            case "S":
+                this.direcction = "O";
+                break;
+            case "E":
+                this.direcction = "S";
+                break;
+            case "O":
+                this.direcction = "N";
+                break;
+        }
+    }
+
+    advanceStep(advancedSteps = 1){
         var newPosition;
         switch(this.direcction){
             case "N":

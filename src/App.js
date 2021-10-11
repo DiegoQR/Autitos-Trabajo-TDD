@@ -34,8 +34,16 @@ export function createCarAt(carCommand, matrixDimentions){
 export function moveCar(moveCarCommand, car){
   var movementCommands = moveCarCommand.split("");
   movementCommands.forEach(moveCommand => {
-    if(moveCommand == 'A'){
-      car.advanceCar();
+    switch(moveCommand){
+      case "A":
+        car.advanceStep();
+        break;
+      case "I":
+        car.turnLeft();
+        break;
+      case "D":
+        car.turnRight();
+        break;     
     }
   });
   return car.getPositionDirection();
