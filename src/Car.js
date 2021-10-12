@@ -45,31 +45,34 @@ export class Car{
         }
     }
 
+    isPositionValid(newPosition){
+        return (newPosition[0] >= 0 && newPosition[0] <= this.limMatrix[0]) && (newPosition[1] >= 0 && newPosition[1] <= this.limMatrix[1])
+    }
+
     advanceStep(advancedSteps = 1){
-        var newPosition;
         switch(this.direcction){
             case "N":
-                newPosition = this.yPos + advancedSteps;
-                if (newPosition >= 0 && newPosition <= this.limMatrix[1]){
-                    this.yPos = newPosition;
+                var newYPosition = this.yPos + advancedSteps;
+                if (this.isPositionValid([this.xPos, newYPosition])){
+                    this.yPos = newYPosition;
                 }
                 break;
             case "S":
-                newPosition = this.yPos - advancedSteps;
-                if (newPosition >= 0 && newPosition <= this.limMatrix[1]){
-                    this.yPos = newPosition;
+                var newYPosition = this.yPos - advancedSteps;
+                if (this.isPositionValid([this.xPos, newYPosition])){
+                    this.yPos = newYPosition;
                 }
                 break;
             case "E":
-                newPosition = this.xPos + advancedSteps;
-                if (newPosition >= 0 && newPosition <= this.limMatrix[1]){
-                    this.xPos = newPosition;
+                var newXPosition = this.xPos + advancedSteps;
+                if (this.isPositionValid([newXPosition, this.yPos])){
+                    this.xPos = newXPosition;
                 }
                 break;
             case "O":
-                newPosition = this.xPos - advancedSteps;
-                if (newPosition >= 0 && newPosition <= this.limMatrix[1]){
-                    this.xPos = newPosition;
+                var newXPosition = this.xPos - advancedSteps;
+                if (this.isPositionValid([newXPosition, this.yPos])){
+                    this.xPos = newXPosition;
                 }
                 break;
         }

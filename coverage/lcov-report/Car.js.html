@@ -25,28 +25,28 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>41/41</span>
+                <span class='fraction'>42/42</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">89.66% </span>
+                <span class="strong">88% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>26/29</span>
+                <span class='fraction'>22/25</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>5/5</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>41/41</span>
+                <span class='fraction'>42/42</span>
             </div>
         
             
@@ -133,7 +133,10 @@
 <a name='L74'></a><a href='#L74'>74</a>
 <a name='L75'></a><a href='#L75'>75</a>
 <a name='L76'></a><a href='#L76'>76</a>
-<a name='L77'></a><a href='#L77'>77</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L77'></a><a href='#L77'>77</a>
+<a name='L78'></a><a href='#L78'>78</a>
+<a name='L79'></a><a href='#L79'>79</a>
+<a name='L80'></a><a href='#L80'>80</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">17x</span>
 <span class="cline-any cline-yes">17x</span>
@@ -179,6 +182,9 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">48x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -256,31 +262,34 @@
         }
     }
 &nbsp;
+    isPositionValid(newPosition){
+        return (newPosition[0] &gt;= 0 &amp;&amp; newPosition[0] &lt;= this.limMatrix[0]) &amp;&amp; (newPosition[1] &gt;= 0 &amp;&amp; newPosition[1] &lt;= this.limMatrix[1])
+    }
+&nbsp;
     advanceStep(advancedSteps = 1){
-        var newPosition;
         switch(this.direcction){
             case "N":
-                newPosition = this.yPos + advancedSteps;
-                <span class="missing-if-branch" title="else path not taken" >E</span>if (newPosition &gt;= 0 &amp;&amp; newPosition &lt;= this.limMatrix[1]){
-                    this.yPos = newPosition;
+                var newYPosition = this.yPos + advancedSteps;
+                <span class="missing-if-branch" title="else path not taken" >E</span>if (this.isPositionValid([this.xPos, newYPosition])){
+                    this.yPos = newYPosition;
                 }
                 break;
             case "S":
-                newPosition = this.yPos - advancedSteps;
-                <span class="missing-if-branch" title="else path not taken" >E</span>if (newPosition &gt;= 0 &amp;&amp; newPosition &lt;= this.limMatrix[1]){
-                    this.yPos = newPosition;
+                var newYPosition = this.yPos - advancedSteps;
+                <span class="missing-if-branch" title="else path not taken" >E</span>if (this.isPositionValid([this.xPos, newYPosition])){
+                    this.yPos = newYPosition;
                 }
                 break;
             case "E":
-                newPosition = this.xPos + advancedSteps;
-                if (newPosition &gt;= 0 &amp;&amp; newPosition &lt;= this.limMatrix[1]){
-                    this.xPos = newPosition;
+                var newXPosition = this.xPos + advancedSteps;
+                if (this.isPositionValid([newXPosition, this.yPos])){
+                    this.xPos = newXPosition;
                 }
                 break;
             case "O":
-                newPosition = this.xPos - advancedSteps;
-                <span class="missing-if-branch" title="else path not taken" >E</span>if (newPosition &gt;= 0 &amp;&amp; newPosition &lt;= this.limMatrix[1]){
-                    this.xPos = newPosition;
+                var newXPosition = this.xPos - advancedSteps;
+                <span class="missing-if-branch" title="else path not taken" >E</span>if (this.isPositionValid([newXPosition, this.yPos])){
+                    this.xPos = newXPosition;
                 }
                 break;
         }
@@ -292,7 +301,7 @@
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Mon Oct 11 2021 17:41:07 GMT-0400 (hora de Bolivia)
+                at Tue Oct 12 2021 16:50:33 GMT-0400 (hora de Bolivia)
             </div>
         </div>
         <script src="prettify.js"></script>
